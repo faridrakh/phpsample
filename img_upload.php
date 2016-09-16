@@ -44,6 +44,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     
     if(!is_dir($udir)){
         mkdir("members/".$id, 0777);
+        if(in_array($imgExt, $valid_extensions)) {   
+            if($imgSize < 5000000) {
+                move_uploaded_file($tmp_dir,$udir.$userpic);
+                $sql->imgupload($id,$userpic);
+            }
+        }
     }
     else {
         if(in_array($imgExt, $valid_extensions)) {   
